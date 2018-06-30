@@ -42,7 +42,10 @@ class ELChannel {
 
 // ---- MAIN FUNCTIONS ----
 
+bool hasReceivedCommand = false;
+
 char buf[4];
+
 ELChannel channels[4] = {
   ELChannel(EL_A), 
   ELChannel(EL_B), 
@@ -58,6 +61,10 @@ void setup() {
 void loop() {
   parseMessage();
   for (int c=0; c<4; c++) { 
+    if (!hasReceivedCommand) {
+      float b = sin(PI * (millis() * 0.0005 + float(c))) * 0.5 + 0.5;
+      channels[c].brightness = b;
+    }
     channels[c].Update();
   }
 }
@@ -86,6 +93,8 @@ void parseMessage() {
   
   Serial.readBytes(buf, 4);
   if (buf[0] != 'C' && buf[2] != 'B') return;
+
+  hasReceivedCommand = true;
  
   char channel = buf[1];
   unsigned char brightness = buf[3];
