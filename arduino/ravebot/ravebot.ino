@@ -62,7 +62,7 @@ void loop() {
   parseMessage();
   for (int c=0; c<4; c++) { 
     if (!hasReceivedCommand) {
-      float b = sin(PI * (millis() * 0.0005 + float(c))) * 0.5 + 0.5;
+      float b = sin(PI * (millis() * 0.0005 + float(c) * 0.5)) * 0.5 + 0.5;
       channels[c].brightness = b;
     }
     channels[c].Update();
