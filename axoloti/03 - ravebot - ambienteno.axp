@@ -29,6 +29,234 @@
       <params/>
       <attribs/>
    </obj>
+   <patcher type="patch/patcher" uuid="9e105b95-39f8-4e8a-aee9-a5c626d235fd" name="lights" x="854" y="42">
+      <params/>
+      <attribs/>
+      <subpatch appVersion="1.0.12">
+         <patcher type="patch/patcher" uuid="7e886d22-cbf0-439d-95d3-ae06cc4e0747" name="patcher_1" x="224" y="98">
+            <params/>
+            <attribs>
+               <combo attributeName="poly" selection="4"/>
+               <combo attributeName="midichannel" selection="1"/>
+               <combo attributeName="mididevice" selection="internal"/>
+               <combo attributeName="midiport" selection="omni"/>
+            </attribs>
+            <subpatch appVersion="1.0.12">
+               <obj type="midi/in/keyb" uuid="53b04874696932f38aceaa168bd5d9efb743716d" name="keyb_1" x="168" y="28">
+                  <params/>
+                  <attribs/>
+               </obj>
+               <obj type="demux/demux 4" uuid="2d85d32578993f1b062c98cb91f49ff3f0f4be47" name="demux_1" x="322" y="42">
+                  <params/>
+                  <attribs/>
+               </obj>
+               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_1" x="462" y="42">
+                  <params/>
+                  <attribs/>
+               </obj>
+               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_2" x="462" y="126">
+                  <params/>
+                  <attribs/>
+               </obj>
+               <obj type="patch/polyindex" uuid="edc730b5393c31d703572e0c0c88aaced643bd6" name="polyindex_1" x="42" y="140">
+                  <params/>
+                  <attribs/>
+               </obj>
+               <obj type="math/divremc" uuid="fd7d945542e16344358136d7e22cffd5be704260" name="divremc_1" x="154" y="140">
+                  <params/>
+                  <attribs>
+                     <spinner attributeName="denominator" value="4"/>
+                  </attribs>
+               </obj>
+               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_3" x="462" y="224">
+                  <params/>
+                  <attribs/>
+               </obj>
+               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_4" x="462" y="322">
+                  <params/>
+                  <attribs/>
+               </obj>
+               <nets>
+                  <net>
+                     <source obj="demux_1" outlet="o0"/>
+                     <dest obj="outlet_1" inlet="outlet"/>
+                  </net>
+                  <net>
+                     <source obj="demux_1" outlet="o1"/>
+                     <dest obj="outlet_2" inlet="outlet"/>
+                  </net>
+                  <net>
+                     <source obj="demux_1" outlet="o2"/>
+                     <dest obj="outlet_3" inlet="outlet"/>
+                  </net>
+                  <net>
+                     <source obj="demux_1" outlet="o3"/>
+                     <dest obj="outlet_4" inlet="outlet"/>
+                  </net>
+                  <net>
+                     <source obj="polyindex_1" outlet="index"/>
+                     <dest obj="divremc_1" inlet="a"/>
+                  </net>
+                  <net>
+                     <source obj="divremc_1" outlet="rem"/>
+                     <dest obj="demux_1" inlet="s"/>
+                  </net>
+                  <net>
+                     <source obj="keyb_1" outlet="gate"/>
+                     <dest obj="demux_1" inlet="i"/>
+                  </net>
+               </nets>
+               <settings>
+                  <subpatchmode>polyphonic</subpatchmode>
+                  <MidiChannel>1</MidiChannel>
+                  <HasMidiChannelSelector>true</HasMidiChannelSelector>
+                  <NPresets>8</NPresets>
+                  <NPresetEntries>32</NPresetEntries>
+                  <NModulationSources>8</NModulationSources>
+                  <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+                  <Saturate>false</Saturate>
+               </settings>
+               <notes><![CDATA[]]></notes>
+               <windowPos>
+                  <x>694</x>
+                  <y>266</y>
+                  <width>840</width>
+                  <height>695</height>
+               </windowPos>
+            </subpatch>
+         </patcher>
+         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_4" x="420" y="98">
+            <params>
+               <frac32.s.map name="delay" value="-1.5000004768371582"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_1" x="560" y="98">
+            <params>
+               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
+               <frac32.s.map name="d" value="53.0"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="serial/el brightness" uuid="c3f57690-74aa-432d-b5cf-8541543d43a3" name="el_1" x="700" y="98">
+            <params/>
+            <attribs/>
+         </obj>
+         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_3" x="420" y="224">
+            <params>
+               <frac32.s.map name="delay" value="0.4999995231628418"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_2" x="560" y="224">
+            <params>
+               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
+               <frac32.s.map name="d" value="52.0"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="midi/in/cc" uuid="6096d217701cbdf251a9ab6ba029af78c5722a56" name="cc_1" x="252" y="294">
+            <params/>
+            <attribs>
+               <spinner attributeName="cc" value="9"/>
+               <spinner attributeName="default" value="0"/>
+            </attribs>
+         </obj>
+         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_2" x="420" y="350">
+            <params>
+               <frac32.s.map name="delay" value="-2.500000476837158"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_3" x="560" y="350">
+            <params>
+               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
+               <frac32.s.map name="d" value="54.0"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_1" x="420" y="476">
+            <params>
+               <frac32.s.map name="delay" value="0.4999995231628418"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_4" x="560" y="476">
+            <params>
+               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
+               <frac32.s.map name="d" value="54.0"/>
+            </params>
+            <attribs/>
+         </obj>
+         <nets>
+            <net>
+               <source obj="ahd_1" outlet="env"/>
+               <dest obj="el_1" inlet="ch1"/>
+            </net>
+            <net>
+               <source obj="ahd_2" outlet="env"/>
+               <dest obj="el_1" inlet="ch2"/>
+            </net>
+            <net>
+               <source obj="ahd_3" outlet="env"/>
+               <dest obj="el_1" inlet="ch3"/>
+            </net>
+            <net>
+               <source obj="ahd_4" outlet="env"/>
+               <dest obj="el_1" inlet="ch4"/>
+            </net>
+            <net>
+               <source obj="pulselengthm_4" outlet="pulse"/>
+               <dest obj="ahd_1" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="pulselengthm_1" outlet="pulse"/>
+               <dest obj="ahd_4" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="pulselengthm_2" outlet="pulse"/>
+               <dest obj="ahd_3" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="pulselengthm_3" outlet="pulse"/>
+               <dest obj="ahd_2" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="patcher_1" outlet="outlet_1"/>
+               <dest obj="pulselengthm_4" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="patcher_1" outlet="outlet_2"/>
+               <dest obj="pulselengthm_3" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="patcher_1" outlet="outlet_3"/>
+               <dest obj="pulselengthm_2" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="patcher_1" outlet="outlet_4"/>
+               <dest obj="pulselengthm_1" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="cc_1" outlet="midiCC"/>
+               <dest obj="pulselengthm_1" inlet="delay"/>
+               <dest obj="pulselengthm_2" inlet="delay"/>
+               <dest obj="pulselengthm_3" inlet="delay"/>
+               <dest obj="pulselengthm_4" inlet="delay"/>
+            </net>
+         </nets>
+         <settings>
+            <subpatchmode>no</subpatchmode>
+         </settings>
+         <notes><![CDATA[]]></notes>
+         <windowPos>
+            <x>189</x>
+            <y>172</y>
+            <width>1134</width>
+            <height>921</height>
+         </windowPos>
+      </subpatch>
+   </patcher>
    <obj type="ctrl/dial b" uuid="862e7d7f29093cb1ce4aed72244d118ad4d46692" name="root" x="42" y="112">
       <params>
          <frac32.s.map name="value" value="-7.0">
@@ -37,7 +265,7 @@
                   <f v="-7.0"/>
                </preset>
                <preset index="2">
-                  <f v="-9.0"/>
+                  <f v="-10.0"/>
                </preset>
             </presets>
          </frac32.s.map>
@@ -140,7 +368,7 @@
          <spinner attributeName="channel" value="1"/>
       </attribs>
    </obj>
-   <patcher type="patch/patcher" uuid="b2f054ef-b3c4-48f7-93eb-d209bf3c8762" name="patcher_1" x="1050" y="182">
+   <patcher type="patch/patcher" uuid="eb0b7af6-2f8c-48e9-b366-d1e2c064bec5" name="patcher_1" x="980" y="182">
       <params>
          <frac32.s.map name="cutoff" MidiCC="13" value="17.0"/>
          <frac32.u.map name="reso" MidiCC="14" value="39.5"/>
@@ -369,7 +597,7 @@
          </windowPos>
       </subpatch>
    </patcher>
-   <patcher type="patch/patcher" uuid="f30e262d-3560-4c4b-aa07-3f278051040d" name="obj_1" x="1176" y="182">
+   <patcher type="patch/patcher" uuid="763bb70d-c52d-4266-9a50-7db130feef54" name="obj_1" x="1106" y="182">
       <params>
          <frac32.u.map name="fdbk" MidiCC="11" value="15.0"/>
          <frac32.u.map name="time" MidiCC="12" value="39.0"/>
@@ -502,11 +730,15 @@
          </windowPos>
       </subpatch>
    </patcher>
-   <obj type="dist/soft" uuid="e680d76a805e4866027cdf654c7efd8b2e54622" name="soft_1" x="1330" y="182">
+   <obj type="math/double" uuid="3b7c0f3e2d95da4ec849103bfaba6c1cee7b8661" name="double_1" x="1260" y="182">
       <params/>
       <attribs/>
    </obj>
-   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="1400" y="182">
+   <obj type="dist/soft" uuid="e680d76a805e4866027cdf654c7efd8b2e54622" name="soft_1" x="1260" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="1330" y="238">
       <params/>
       <attribs/>
    </obj>
@@ -572,234 +804,6 @@
          <spinner attributeName="channel" value="1"/>
       </attribs>
    </obj>
-   <patcher type="patch/patcher" uuid="08c5478e-2cdf-4845-abdf-51a08f7ccd04" name="lights" x="868" y="378">
-      <params/>
-      <attribs/>
-      <subpatch appVersion="1.0.12">
-         <patcher type="patch/patcher" uuid="0c3c6334-211e-43a9-804e-e4f243b94a1e" name="patcher_1" x="224" y="98">
-            <params/>
-            <attribs>
-               <combo attributeName="poly" selection="4"/>
-               <combo attributeName="midichannel" selection="1"/>
-               <combo attributeName="mididevice" selection="internal"/>
-               <combo attributeName="midiport" selection="omni"/>
-            </attribs>
-            <subpatch appVersion="1.0.12">
-               <obj type="midi/in/keyb" uuid="53b04874696932f38aceaa168bd5d9efb743716d" name="keyb_1" x="168" y="28">
-                  <params/>
-                  <attribs/>
-               </obj>
-               <obj type="demux/demux 4" uuid="2d85d32578993f1b062c98cb91f49ff3f0f4be47" name="demux_1" x="322" y="42">
-                  <params/>
-                  <attribs/>
-               </obj>
-               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_1" x="462" y="42">
-                  <params/>
-                  <attribs/>
-               </obj>
-               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_2" x="462" y="126">
-                  <params/>
-                  <attribs/>
-               </obj>
-               <obj type="patch/polyindex" uuid="edc730b5393c31d703572e0c0c88aaced643bd6" name="polyindex_1" x="42" y="140">
-                  <params/>
-                  <attribs/>
-               </obj>
-               <obj type="math/divremc" uuid="fd7d945542e16344358136d7e22cffd5be704260" name="divremc_1" x="154" y="140">
-                  <params/>
-                  <attribs>
-                     <spinner attributeName="denominator" value="4"/>
-                  </attribs>
-               </obj>
-               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_3" x="462" y="224">
-                  <params/>
-                  <attribs/>
-               </obj>
-               <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="outlet_4" x="462" y="322">
-                  <params/>
-                  <attribs/>
-               </obj>
-               <nets>
-                  <net>
-                     <source obj="demux_1" outlet="o0"/>
-                     <dest obj="outlet_1" inlet="outlet"/>
-                  </net>
-                  <net>
-                     <source obj="demux_1" outlet="o1"/>
-                     <dest obj="outlet_2" inlet="outlet"/>
-                  </net>
-                  <net>
-                     <source obj="demux_1" outlet="o2"/>
-                     <dest obj="outlet_3" inlet="outlet"/>
-                  </net>
-                  <net>
-                     <source obj="demux_1" outlet="o3"/>
-                     <dest obj="outlet_4" inlet="outlet"/>
-                  </net>
-                  <net>
-                     <source obj="polyindex_1" outlet="index"/>
-                     <dest obj="divremc_1" inlet="a"/>
-                  </net>
-                  <net>
-                     <source obj="divremc_1" outlet="rem"/>
-                     <dest obj="demux_1" inlet="s"/>
-                  </net>
-                  <net>
-                     <source obj="keyb_1" outlet="gate"/>
-                     <dest obj="demux_1" inlet="i"/>
-                  </net>
-               </nets>
-               <settings>
-                  <subpatchmode>polyphonic</subpatchmode>
-                  <MidiChannel>1</MidiChannel>
-                  <HasMidiChannelSelector>true</HasMidiChannelSelector>
-                  <NPresets>8</NPresets>
-                  <NPresetEntries>32</NPresetEntries>
-                  <NModulationSources>8</NModulationSources>
-                  <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
-                  <Saturate>false</Saturate>
-               </settings>
-               <notes><![CDATA[]]></notes>
-               <windowPos>
-                  <x>694</x>
-                  <y>266</y>
-                  <width>840</width>
-                  <height>695</height>
-               </windowPos>
-            </subpatch>
-         </patcher>
-         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_4" x="420" y="98">
-            <params>
-               <frac32.s.map name="delay" value="-1.5000004768371582"/>
-            </params>
-            <attribs/>
-         </obj>
-         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_1" x="560" y="98">
-            <params>
-               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
-               <frac32.s.map name="d" value="53.0"/>
-            </params>
-            <attribs/>
-         </obj>
-         <obj type="serial/el brightness" uuid="c3f57690-74aa-432d-b5cf-8541543d43a3" name="el_1" x="700" y="98">
-            <params/>
-            <attribs/>
-         </obj>
-         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_3" x="420" y="224">
-            <params>
-               <frac32.s.map name="delay" value="0.4999995231628418"/>
-            </params>
-            <attribs/>
-         </obj>
-         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_2" x="560" y="224">
-            <params>
-               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
-               <frac32.s.map name="d" value="52.0"/>
-            </params>
-            <attribs/>
-         </obj>
-         <obj type="midi/in/cc" uuid="6096d217701cbdf251a9ab6ba029af78c5722a56" name="cc_1" x="252" y="294">
-            <params/>
-            <attribs>
-               <spinner attributeName="cc" value="9"/>
-               <spinner attributeName="default" value="0"/>
-            </attribs>
-         </obj>
-         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_2" x="420" y="350">
-            <params>
-               <frac32.s.map name="delay" value="-2.500000476837158"/>
-            </params>
-            <attribs/>
-         </obj>
-         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_3" x="560" y="350">
-            <params>
-               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
-               <frac32.s.map name="d" value="54.0"/>
-            </params>
-            <attribs/>
-         </obj>
-         <obj type="timer/pulselengthm" uuid="62560cedc7cebe84778bc1bb4fc6c2122074a4ab" name="pulselengthm_1" x="420" y="476">
-            <params>
-               <frac32.s.map name="delay" value="0.4999995231628418"/>
-            </params>
-            <attribs/>
-         </obj>
-         <obj type="env/ahd lin" uuid="4ed5fd29254747e71db6d1d4caa20a89a41740f0" name="ahd_4" x="560" y="476">
-            <params>
-               <frac32.s.map name="a" MidiCC="10" value="0.0"/>
-               <frac32.s.map name="d" value="54.0"/>
-            </params>
-            <attribs/>
-         </obj>
-         <nets>
-            <net>
-               <source obj="ahd_1" outlet="env"/>
-               <dest obj="el_1" inlet="ch1"/>
-            </net>
-            <net>
-               <source obj="ahd_2" outlet="env"/>
-               <dest obj="el_1" inlet="ch2"/>
-            </net>
-            <net>
-               <source obj="ahd_3" outlet="env"/>
-               <dest obj="el_1" inlet="ch3"/>
-            </net>
-            <net>
-               <source obj="ahd_4" outlet="env"/>
-               <dest obj="el_1" inlet="ch4"/>
-            </net>
-            <net>
-               <source obj="pulselengthm_4" outlet="pulse"/>
-               <dest obj="ahd_1" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="pulselengthm_1" outlet="pulse"/>
-               <dest obj="ahd_4" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="pulselengthm_2" outlet="pulse"/>
-               <dest obj="ahd_3" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="pulselengthm_3" outlet="pulse"/>
-               <dest obj="ahd_2" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="patcher_1" outlet="outlet_1"/>
-               <dest obj="pulselengthm_4" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="patcher_1" outlet="outlet_2"/>
-               <dest obj="pulselengthm_3" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="patcher_1" outlet="outlet_3"/>
-               <dest obj="pulselengthm_2" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="patcher_1" outlet="outlet_4"/>
-               <dest obj="pulselengthm_1" inlet="trig"/>
-            </net>
-            <net>
-               <source obj="cc_1" outlet="midiCC"/>
-               <dest obj="pulselengthm_1" inlet="delay"/>
-               <dest obj="pulselengthm_2" inlet="delay"/>
-               <dest obj="pulselengthm_3" inlet="delay"/>
-               <dest obj="pulselengthm_4" inlet="delay"/>
-            </net>
-         </nets>
-         <settings>
-            <subpatchmode>no</subpatchmode>
-         </settings>
-         <notes><![CDATA[]]></notes>
-         <windowPos>
-            <x>189</x>
-            <y>172</y>
-            <width>1134</width>
-            <height>921</height>
-         </windowPos>
-      </subpatch>
-   </patcher>
    <obj type="phased note" uuid="beffd7a3-de19-48e6-8af5-4f3ff9d1441c" name="phased_3" x="140" y="546">
       <params>
          <frac32.s.map name="interval" value="-5.0">
@@ -987,10 +991,6 @@
          <dest obj="phase" inlet="v"/>
       </net>
       <net>
-         <source obj="obj_1" outlet="out"/>
-         <dest obj="soft_1" inlet="in"/>
-      </net>
-      <net>
          <source obj="soft_1" outlet="out"/>
          <dest obj="out_1" inlet="left"/>
          <dest obj="out_1" inlet="right"/>
@@ -1008,15 +1008,23 @@
          <source obj="+1_1" outlet="result"/>
          <dest obj="preset_1" inlet="preset"/>
       </net>
+      <net>
+         <source obj="obj_1" outlet="out"/>
+         <dest obj="double_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="double_1" outlet="out"/>
+         <dest obj="soft_1" inlet="in"/>
+      </net>
    </nets>
    <settings>
       <subpatchmode>no</subpatchmode>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>140</x>
-      <y>198</y>
-      <width>1679</width>
-      <height>961</height>
+      <x>0</x>
+      <y>23</y>
+      <width>1440</width>
+      <height>873</height>
    </windowPos>
 </patch-1.0>
